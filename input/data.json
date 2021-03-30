@@ -1,0 +1,40 @@
+{
+   "Body" : {
+      "DAY_ENERGY" : {
+         "Unit" : "Wh",
+         "Values" : {
+            "1" : 32123
+         }
+      },
+      "PAC" : {
+         "Unit" : "W",
+         "Values" : {
+            "1" : 0
+         }
+      },
+      "TOTAL_ENERGY" : {
+         "Unit" : "Wh",
+         "Values" : {
+            "1" : 409246
+         }
+      },
+      "YEAR_ENERGY" : {
+         "Unit" : "Wh",
+         "Values" : {
+            "1" : 409244
+         }
+      }
+   },
+   "Head" : {
+      "RequestArguments" : {
+         "Query" : "Inverter",
+         "Scope" : "System"
+      },
+      "Status" : {
+         "Code" : 0,
+         "Reason" : "",
+         "UserMessage" : ""
+      },
+      "Timestamp" : "2021-03-30T20:10:50+02:00"
+   }
+}
