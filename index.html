@@ -1,172 +1,112 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="See some details about PV system">
     <title>Fotowoltaika &ndash; Leśniewicz </title>
     <link rel="stylesheet" href="css/pure-min.css">
     <link rel="stylesheet" href="css/grids-responsive-min.css">
-    <link rel="icon" type="image/png" href="css/favicon.png"/>
-	<link rel="stylesheet" href="css/styles.css">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<body>	
-	
-</head>
-
-
-<div class="banner">
-    <h1 class="banner-head">
-         Fotowoltaika &ndash; Leśniewicz <br>
-		<p2 style="font-size:0.8em">ilość wyprodukowanego prądu </p2>
-    </h1>
-</div>
-
-<div class="l-content">
-    <div class="pricing-tables pure-g">
-        <div class="pure-u-1 pure-u-md-1-3">
-            <div class="pricing-table pricing-table-biz pricing-table-selected">
-                <div class="pricing-table-header">
-                    <h2>W TYM ROKU</h2>
-
-                    <span class="pricing-table-price">
-					<div id="myData12"> </div>
-					<span>kWh</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-		
-		<div class="pure-u-1 pure-u-md-1-3">
-            <div class="pricing-table pricing-table-free">
-                <div class="pricing-table-header">
-                    <h2>DZISIAJ</h2>
-                    <span class="pricing-table-price">
-						<div id="myData11"></div>
-						<span>kWh</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-		
-		
-        <div class="pure-u-1 pure-u-md-1-3">
-            <div class="pricing-table pricing-table-enterprise">
-                <div class="pricing-table-header">
-                    <h2>CAŁOŚĆ</h2>
-                    <span class="pricing-table-price">
-                        <div id="myData13"> </div>
-						<span>kWh</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-		
-
-		<div class="pure-u-1 pure-u-md-1-3">
-            
-        </div>
-		
-		
-		<div class="pure-u-1 pure-u-md-1-3">
-            <div class="pricing-table pricing-table-free-actual">
-			
-                <div class="pricing-table-header">
-                    <h2>MOC CHWILOWA</h2>
-                    <span class="pricing-table-price">
-                        <div id="myData14"> </div>
-						<span>kW</span>
-                    </span>
-                </div>
-				<div class="dateBox" id="dateBox"> </div>
-            </div>
-        </div>
-		
+    <link rel="icon" type="image/png" href="css/favicon.png" />
+    <link rel="stylesheet" href="css/styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <body>
+    </head>
+    <div class="banner">
+      <h1 class="banner-head"> Fotowoltaika &ndash; Leśniewicz <br>
+        <p2 style="font-size:0.8em">ilość wyprodukowanego prądu </p2>
+      </h1>
     </div>
+    <div class="l-content">
+      <div class="pricing-tables pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="pricing-table pricing-table-biz pricing-table-selected">
+            <div class="pricing-table-header">
+              <h2>W TYM ROKU</h2><span class="pricing-table-price">
+                <div id="myData12"></div><span>kWh</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="pricing-table pricing-table-free">
+            <div class="pricing-table-header">
+              <h2>DZISIAJ</h2><span class="pricing-table-price">
+                <div id="myData11"></div><span>kWh</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="pricing-table pricing-table-enterprise">
+            <div class="pricing-table-header">
+              <h2>CAŁOŚĆ</h2><span class="pricing-table-price">
+                <div id="myData13"></div><span>kWh</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3"></div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="pricing-table pricing-table-free-actual">
+            <div class="pricing-table-header">
+              <h2>MOC CHWILOWA</h2><span class="pricing-table-price">
+                <div id="myData14"></div><span>kW</span>
+              </span>
+            </div>
+            <div class="dateBox" id="dateBox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer l-box">
+      <p> Created by Daniel Leśniewicz <a href='http://lesniewicz.toadres.pl/'>http://lesniewicz.toadres.pl/</a>
+        <!-- I used pure-css template --  -->undefined</p>undefined
+    </div>undefined<script>
+      var box1 = document.getElementById("myData11");
+      var box2 = document.getElementById("myData12");
+      var box3 = document.getElementById("myData13");
+      var box5 = document.getElementById("myData14");
+      var box_date = document.getElementById("dateBox");
+      display();
+      setInterval(() => {
+        display();
+      }, 10000)
 
-</div> 
+      function display() {
+        fetch('input/data.json').then(function(response) {
+          return response.json();
+        }).then(function(data) {
+          appendData(data, box1, box2, box3, box5, box_date);
+        }).catch(function(err) {
+          console.log('error: ' + err);
+        });
+      }
 
+      function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
 
-<div class="footer l-box">
-    <p>
-        Created by Daniel Leśniewicz  <a href='http://lesniewicz.toadres.pl/'>http://lesniewicz.toadres.pl/</a>
-		<!-- I used pure-css template --  -->
-    </p>
-</div>
-
-
-<script>
-
-	var box1 = document.getElementById("myData11");
-	var box2 = document.getElementById("myData12");
-	var box3 = document.getElementById("myData13");
-	var box5 = document.getElementById("myData14");
-	var box_date = document.getElementById("dateBox");
-
-	display();
-	 
-	setInterval(() => {
-						display();
-						}	
-						, 10000)
-	 
-	 
-	function display() {
-		fetch('input/data.json')
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				appendData(data, box1, box2, box3, box5, box_date);
-			})
-			.catch(function (err) {
-				console.log('error: ' + err);
-			});
-
-	} 
-	
-	
-	function addZero(i) {
-	  if (i < 10) {
-		i = "0" + i;
-	  }
-	  return i;
-	}
-	
-	 
-	function appendData(data, box1, box2, box3, box5, box_date) {
-		var div = document.createElement("div");
-		box1.innerHTML = data['Body']['DAY_ENERGY']['Values']['1']/1000.0;
-		  
-		var div = document.createElement("div");
-		box2.innerHTML = (data['Body']['YEAR_ENERGY']['Values']['1']/1000.0).toFixed(2);
-		 
-		var div = document.createElement("div");
-		box3.innerHTML = (data['Body']['TOTAL_ENERGY']['Values']['1']/1000.0).toFixed(2);
-
-		var div = document.createElement("div");
-		if(data['Body']['PAC']['Values']['1'] == 0){
-			box5.innerHTML = "-"
-		}
-		else{
-			box5.innerHTML = data['Body']['PAC']['Values']['1']/1000.0;
-		}
-		
-		 	
-		var date = new Date(data['Head']['Timestamp']);
-		
-		var div = document.createElement("div");
-		box_date.innerHTML = "<i>Ostatnia synchronizacja: <b>" 
-			 +addZero(date.getHours())+
-          ":"+addZero(date.getMinutes())+
-          ":"+addZero(date.getSeconds())+
-		  "</b> "+ addZero(date.getDate())+
-          "-"+addZero(date.getMonth()+1)+
-          "-"+date.getFullYear()+"<i>";
-	}
-	
-</script>
-
-
-</body>
+      function appendData(data, box1, box2, box3, box5, box_date) {
+        var div = document.createElement("div");
+        box1.innerHTML = data['Body']['DAY_ENERGY']['Values']['1'] / 1000.0;
+        var div = document.createElement("div");
+        box2.innerHTML = (data['Body']['YEAR_ENERGY']['Values']['1'] / 1000.0).toFixed(2);
+        var div = document.createElement("div");
+        box3.innerHTML = (data['Body']['TOTAL_ENERGY']['Values']['1'] / 1000.0).toFixed(2);
+        var div = document.createElement("div");
+        if (data['Body']['PAC']['Values']['1'] == 0) {
+          box5.innerHTML = "-"
+        } else {
+          box5.innerHTML = data['Body']['PAC']['Values']['1'] / 1000.0;
+        }
+        var date = new Date(data['Head']['Timestamp']);
+        var div = document.createElement("div");
+        box_date.innerHTML = "undefined<i>Ostatnia synchronizacja:  < b > "  + addZero(date.getHours()) + ":" + addZero(date.getMinutes()) + ":" + addZero(date.getSeconds()) + "</b> " + addZero(date.getDate()) + "-" + addZero(date.getMonth() + 1) + "-" + date.getFullYear() + " < i > ";
+      }
+    </script>undefined
+  </body>undefined
 </html>
